@@ -26,7 +26,7 @@ class _StartPageState extends State<StartPage> {
   Future<void> signIn() async{
     var driver = await Driver.getDriverByToken();
     if(driver != null){
-      Navigator.of(context).push(MaterialPageRoute(builder: (context)=> HomePage(driver: driver)));
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> HomePage(driver: driver)));
     }
   }
 

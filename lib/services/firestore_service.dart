@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:wsmb_day1_try1/models/driver.dart';
+import 'package:wsmb_day1_try1/models/ride.dart';
+import 'package:wsmb_day1_try1/models/vechicle.dart';
+import 'package:wsmb_day1_try1/pages/vehicle_page.dart';
 
 class FirestoreService {
   static final firestore = FirebaseFirestore.instance;
@@ -95,6 +98,98 @@ class FirestoreService {
       }
     } catch (e) {
       return null;
+    }
+  }
+
+  static Future<bool> addVehicle(Vehicle vehicle) async {
+    try {
+      vehicle.id =
+          'V${DateTime.now().millisecondsSinceEpoch}-${vehicle.driver_id}';
+      var doc = firestore.collection('vehicles').doc(vehicle.id);
+      doc.set(vehicle.toJson());
+
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  static Future<List<Vehicle>> getVehicle(String driver_id) async {
+    try {
+      var collection = await firestore
+          .collection('vehicles')
+          .where('driver_id', isEqualTo: driver_id)
+          .get();
+
+      if (collection.docs.isEmpty) {
+        return [];
+      }
+
+      var list =
+          collection.docs.map((e) => Vehicle.fromJson(e.data(), e.id)).toList();
+      return list;
+    } catch (e) {
+      return [];
+    }
+  }
+
+
+static Future<List<Ride>> getRide(String driver_id) async {
+    try {
+      // var collection = await firestore
+      //     .collection('vehicles')
+      //     .where('driver_id', isEqualTo: driver_id)
+      //     .get();
+        
+      var ride = await firestore.collection('rides').get();
+      var collection = ride.docs.where((e)=>e.id.contains(driver_id));
+
+      if (collection.isEmpty) {
+        return [];
+      }
+
+      var list =
+          collection.map((e) => Ride.fromJson(e.data(), e.id)).toList();
+      return list;
+    } catch (e) {
+      return [];
+    }
+  }
+
+  static Future<bool> addRide(Ride ride) async{
+    try {
+      ride.id =
+          'R${DateTime.now().millisecondsSinceEpoch}-${ride.vehicle_id}';
+      var doc = firestore.collection('rides').doc(ride.id);
+      doc.set(ride.toJson());
+
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  static Future<bool> updateVehicle(Vehicle vehicle, String id) async {
+    try {
+     await firestore
+          .collection('vehicles')
+          .doc(id)
+          .update(vehicle.toJson());
+
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  static Future<bool> deleteVehicle(String vehicle_id) async {
+    try {
+      var collection =
+          await firestore.collection('vehicles').doc(vehicle_id).delete();
+
+      return true;
+    } catch (e) {
+      return false;
     }
   }
 }

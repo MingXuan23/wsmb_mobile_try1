@@ -63,14 +63,29 @@ class Driver {
     return driver;
   }
 
-  static Future<Driver?> getDriverByToken() async {
-   
-
+  static Future<String> getToken() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     var token = pref.getString('token');
-    if(token == null)
-    {return null;}
-    
+    if (token == null) {
+      return '';
+    }
+    return token;
+  }
+
+   static Future<bool> signOut() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    var logout =  await pref.remove('token');
+  
+    return logout;
+  }
+
+  static Future<Driver?> getDriverByToken() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    var token = pref.getString('token');
+    if (token == null) {
+      return null;
+    }
+
     var driver = await FirestoreService.validateTokenDriver(token);
     return driver;
   }

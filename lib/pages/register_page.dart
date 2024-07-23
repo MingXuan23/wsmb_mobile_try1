@@ -4,6 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:wsmb_day1_try1/models/driver.dart';
+import 'package:wsmb_day1_try1/widgets/pickerSheet.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -92,7 +93,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Future<void> takePhoto(BuildContext context) async {
     ImageSource? source = await showModalBottomSheet(
-        context: context, builder: (context) => _buildBottomSheet(context));
+        context: context, builder: (context) => buildBottomSheet(context));
 
     if (source == null) {
       return;
@@ -252,34 +253,3 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 }
 
-Widget _buildBottomSheet(BuildContext context) {
-  return Wrap(
-    children: [
-      ListTile(
-        leading: Icon(Icons.camera_alt),
-        title: Text('Camera'),
-        onTap: () {
-          // Handle camera option
-          Navigator.pop(context, ImageSource.camera); // Close the bottom sheet
-        },
-      ),
-      ListTile(
-        leading: Icon(Icons.photo_library),
-        title: Text(
-          'Gallery',
-        ),
-        onTap: () {
-          // Handle gallery option
-          Navigator.pop(context, ImageSource.gallery); // Close the bottom sheet
-        },
-      ),
-      ListTile(
-        leading: Icon(Icons.cancel),
-        title: Text('Cancel'),
-        onTap: () {
-          Navigator.pop(context); // Close the bottom sheet
-        },
-      ),
-    ],
-  );
-}
