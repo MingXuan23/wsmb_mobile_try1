@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:wsmb_day1_try1/models/driver.dart';
-import 'package:wsmb_day1_try1/models/ride.dart';
-import 'package:wsmb_day1_try1/models/vechicle.dart';
-import 'package:wsmb_day1_try1/pages/vehicle_page.dart';
+import 'package:wsmb_day1_try1/day1/models/driver.dart';
+import 'package:wsmb_day1_try1/day1/models/ride.dart';
+import 'package:wsmb_day1_try1/day1/models/vechicle.dart';
+import 'package:wsmb_day1_try1/day1/pages/vehicle_page.dart';
 
 class FirestoreService {
   static final firestore = FirebaseFirestore.instance;

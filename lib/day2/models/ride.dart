@@ -1,4 +1,6 @@
-import 'dart:ffi';
+
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Ride {
   final DateTime date;
@@ -8,9 +10,14 @@ class Ride {
   final String vehicle_id;
   String status;
   String? id;
+  List<String>? riderIds =[];
+  List<DocumentReference>? riders = [];
+  
 
   Ride(
       {this.id,
+       this.riderIds,
+       this.riders,
       required this.status,
       required this.date,
       required this.origin,
@@ -19,6 +26,12 @@ class Ride {
       required this.vehicle_id});
 
   factory Ride.fromJson(Map<String, dynamic> json, String rid) {
+    var id = json['riderIds'] as List;
+    var newids = id.map((x) => x.toString()).toList() as List<String>;
+
+     var ref = json['riders'] as List;
+    var refList = ref.map((x) => x as DocumentReference).toList() as List<DocumentReference>;
+    
     return Ride(
       id: rid,
       date: DateTime.parse(json['date']),
@@ -26,7 +39,9 @@ class Ride {
       destination: json['destination'] ?? '',
       vehicle_id: json['vehicle_id'] ?? '',
       fare: json['fare'] as double,
-      status: json['status']??'Cancelled'
+      status: json['status']??'Cancelled',
+      riderIds: newids,
+      riders: refList
     );
   }
 
@@ -38,7 +53,9 @@ class Ride {
       'destination': destination,
       'origin': origin,
       'date': date.toString(),
-      'status':status
+      'status':status,
+      'riderIds':riderIds??[],
+      'riders':riders??[]
     };
   }
 }

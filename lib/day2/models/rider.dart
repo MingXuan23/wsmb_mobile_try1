@@ -1,12 +1,14 @@
+
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:crypto/crypto.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wsmb_day1_try1/services/firestore_service.dart';
 
-class Driver {
+import 'package:wsmb_day1_try1/day2/services/database_service.dart';
+
+class Rider {
   String? id;
   final String email;
   final String address;
@@ -17,8 +19,10 @@ class Driver {
   String? password;
   String? photo;
 
-  Driver(
-      {required this.email,
+  Rider(
+      {
+        this.id,
+        required this.email,
       required this.address,
       required this.gender,
       required this.icno,
@@ -26,46 +30,46 @@ class Driver {
       required this.phone,
       this.photo});
 
-  static Future<Driver?> register(
-      Driver driver, String password, File image) async {
-    if (await FirestoreService.isDuplicated(driver)) {
+  static Future<Rider?> register(
+      Rider rider, String password, File image) async {
+    if (await DatabaseService.isDuplicated(rider)) {
       return null;
     }
 
     var byte = utf8.encode(password);
     var hashedPassword = sha256.convert(byte).toString();
 
-    driver.password = hashedPassword;
+    rider.password = hashedPassword;
 
-    String fileName = 'images/${DateTime.now().millisecondsSinceEpoch}.jpg';
+    String fileName = 'riders/${DateTime.now().millisecondsSinceEpoch}.jpg';
     UploadTask uploadTask =
         FirebaseStorage.instance.ref(fileName).putFile(image!);
     TaskSnapshot snapshot = await uploadTask;
     String downloadURL = await snapshot.ref.getDownloadURL();
-    driver.photo = downloadURL;
+    rider.photo = downloadURL;
 
-    var newDriver = await FirestoreService.addDriver(driver);
-    if (newDriver == null) return null;
+    var newrider = await DatabaseService.addRider(rider);
+    if (newrider == null) return null;
 
-    return newDriver;
+    return newrider;
   }
 
-  static Future<Driver?> login(String ic, String password) async {
+  static Future<Rider?> login(String ic, String password) async {
     var byte = utf8.encode(password);
     var hashedPassword = sha256.convert(byte).toString();
 
-    var driver = await FirestoreService.loginDriver(ic, hashedPassword);
-    if (driver == null) {
+    var rider = await DatabaseService.loginRider(ic, hashedPassword);
+    if (rider == null) {
       return null;
     }
     SharedPreferences pref = await SharedPreferences.getInstance();
-    await pref.setString('token', driver.id.toString());
-    return driver;
+    await pref.setString('rider_token', rider.id.toString());
+    return rider;
   }
 
   static Future<String> getToken() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    var token = pref.getString('token');
+    var token = pref.getString('rider_token');
     if (token == null) {
       return '';
     }
@@ -74,24 +78,25 @@ class Driver {
 
    static Future<bool> signOut() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    var logout =  await pref.remove('token');
+    var logout =  await pref.remove('rider_token');
   
     return logout;
   }
 
-  static Future<Driver?> getDriverByToken() async {
+  static Future<Rider?> getRiderByToken() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    var token = pref.getString('token');
+    var token = pref.getString('rider_token');
     if (token == null) {
       return null;
     }
 
-    var driver = await FirestoreService.validateTokenDriver(token);
-    return driver;
+    var rider = await DatabaseService.validateTokenRider(token);
+    return rider;
   }
 
-  factory Driver.fromJson(Map<String, dynamic> json) {
-    return Driver(
+  factory Rider.fromJson(Map<String, dynamic> json, String id) {
+    return Rider(
+        id:id,
         email: json['email'] ?? '',
         address: json['address'] ?? '',
         gender: json['gender'] as bool,

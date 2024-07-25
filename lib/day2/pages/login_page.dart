@@ -1,14 +1,16 @@
-import 'package:flutter/material.dart';
-import 'package:wsmb_day1_try1/models/driver.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+
+import 'package:flutter/material.dart';
+import 'package:wsmb_day1_try1/day2/models/rider.dart';
+
+class LoginPage2 extends StatefulWidget {
+  const LoginPage2({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<LoginPage2> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage2> {
   final icnoController = TextEditingController();
   final passwordController = TextEditingController();
   final formkey = GlobalKey<FormState>();
@@ -16,8 +18,8 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<void> login() async{
     if(formkey.currentState!.validate()){
-      var driver = await Driver.login(icnoController.text, passwordController.text);
-      if(driver == null){
+      var rider = await Rider.login(icnoController.text, passwordController.text);
+      if(rider == null){
           await showDialog(context: context, builder: (context)=> AlertDialog(
                 title: Text('Warning'),
                 content: Text('Invalid Login'),
@@ -51,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Driver Log In'),
+          title: Text('Rider Log In'),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:wsmb_day1_try1/models/ride.dart';
-import 'package:wsmb_day1_try1/models/vechicle.dart';
-import 'package:wsmb_day1_try1/services/firestore_service.dart';
+import 'package:wsmb_day1_try1/day1/models/ride.dart';
+import 'package:wsmb_day1_try1/day1/models/vechicle.dart';
+import 'package:wsmb_day1_try1/day1/services/firestore_service.dart';
 
 class CreateRidePage extends StatefulWidget {
   const CreateRidePage({super.key, required this.vehicleList});

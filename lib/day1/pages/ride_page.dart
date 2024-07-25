@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:wsmb_day1_try1/models/driver.dart';
-import 'package:wsmb_day1_try1/models/ride.dart';
-import 'package:wsmb_day1_try1/models/vechicle.dart';
-import 'package:wsmb_day1_try1/pages/create_ride_page.dart';
-import 'package:wsmb_day1_try1/services/firestore_service.dart';
-import 'package:wsmb_day1_try1/widgets/ride_card.dart';
+import 'package:wsmb_day1_try1/day1/models/driver.dart';
+import 'package:wsmb_day1_try1/day1/models/ride.dart';
+import 'package:wsmb_day1_try1/day1/models/vechicle.dart';
+import 'package:wsmb_day1_try1/day1/pages/create_ride_page.dart';
+import 'package:wsmb_day1_try1/day1/services/firestore_service.dart';
+import 'package:wsmb_day1_try1/day1/widgets/ride_card.dart';
 
 class RideTabPage extends StatelessWidget {
   const RideTabPage({super.key});

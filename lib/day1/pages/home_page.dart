@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:wsmb_day1_try1/models/driver.dart';
-import 'package:wsmb_day1_try1/pages/profile._page.dart';
-import 'package:wsmb_day1_try1/pages/ride_page.dart';
-import 'package:wsmb_day1_try1/pages/vehicle_page.dart';
+import 'package:wsmb_day1_try1/day1/models/driver.dart';
+import 'package:wsmb_day1_try1/day1/pages/profile._page.dart';
+import 'package:wsmb_day1_try1/day1/pages/ride_page.dart';
+import 'package:wsmb_day1_try1/day1/pages/vehicle_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.driver});

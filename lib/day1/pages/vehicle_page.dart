@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:wsmb_day1_try1/models/driver.dart';
-import 'package:wsmb_day1_try1/models/vechicle.dart';
-import 'package:wsmb_day1_try1/pages/create_vehicle_page.dart';
-import 'package:wsmb_day1_try1/services/firestore_service.dart';
-import 'package:wsmb_day1_try1/widgets/vehicle_card.dart';
+import 'package:wsmb_day1_try1/day1/models/driver.dart';
+import 'package:wsmb_day1_try1/day1/models/vechicle.dart';
+import 'package:wsmb_day1_try1/day1/pages/create_vehicle_page.dart';
+import 'package:wsmb_day1_try1/day1/services/firestore_service.dart';
+import 'package:wsmb_day1_try1/day1/widgets/vehicle_card.dart';
 
 class VehicleTabPage extends StatelessWidget {
   const VehicleTabPage({super.key});

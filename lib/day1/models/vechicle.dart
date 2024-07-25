@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wsmb_day1_try1/services/firestore_service.dart';
+import 'package:wsmb_day1_try1/day1/services/firestore_service.dart';
 
 class Vehicle {
   final String car_model;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:wsmb_day1_try1/models/driver.dart';
-import 'package:wsmb_day1_try1/pages/home_page.dart';
-import 'package:wsmb_day1_try1/pages/login_page.dart';
-import 'package:wsmb_day1_try1/pages/register_page.dart';
+import 'package:wsmb_day1_try1/day1/models/driver.dart';
+import 'package:wsmb_day1_try1/day1/pages/home_page.dart';
+import 'package:wsmb_day1_try1/day1/pages/login_page.dart';
+import 'package:wsmb_day1_try1/day1/pages/register_page.dart';
 
 class StartPage extends StatefulWidget {
   const StartPage({super.key});

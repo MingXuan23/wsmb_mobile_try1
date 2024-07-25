@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:wsmb_day1_try1/day2/pages/start_page.dart';
 import 'package:wsmb_day1_try1/firebase_options.dart';
-import 'package:wsmb_day1_try1/models/driver.dart';
-import 'package:wsmb_day1_try1/pages/start_page.dart';
-import 'package:wsmb_day1_try1/services/firestore_service.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,7 +12,7 @@ void main() async {
       const Settings(persistenceEnabled: true);
   //await FirestoreService.addDriver(Driver(email: 'ss', address: 'ss', gender: true, icno: 'ss', name: 'ss', phone: 'ss'));
       
-  runApp(const MyApp(home: StartPage(),));
+  runApp(const MyApp(home: StartPage2(),));
 }
 
 class MyApp extends StatelessWidget {

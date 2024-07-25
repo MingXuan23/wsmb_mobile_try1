@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:wsmb_day1_try1/models/vechicle.dart';
-import 'package:wsmb_day1_try1/widgets/pickerSheet.dart';
+import 'package:wsmb_day1_try1/day1/models/vechicle.dart';
+import 'package:wsmb_day1_try1/day1/widgets/pickerSheet.dart';
 
 class CreateVehiclePage extends StatefulWidget {
   const CreateVehiclePage({super.key});
