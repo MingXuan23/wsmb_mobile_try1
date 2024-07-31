@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:wsmb_day1_try1/day2/pages/start_page.dart';
 import 'package:wsmb_day1_try1/firebase_options.dart';
+import 'package:wsmb_day1_try1/node_graph/node.dart';
 
 
 void main() async {
@@ -12,7 +13,7 @@ void main() async {
       const Settings(persistenceEnabled: true);
   //await FirestoreService.addDriver(Driver(email: 'ss', address: 'ss', gender: true, icno: 'ss', name: 'ss', phone: 'ss'));
       
-  runApp(const MyApp(home: StartPage2(),));
+  runApp( MyApp(home: RideRidersRelationship(numberOfRiders: 7,),));
 }
 
 class MyApp extends StatelessWidget {
@@ -34,3 +35,8 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
